@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>test client</title>
+    <script src="superfetch2.js"></script>
+</head>
+
+<body>
+
+    <input id="listId" placeholder="List ID">
+    <label for="inpDescr">Description:</label>
+    <input id="description" placeholder="Description">
+    <input id="done" placeholder="True/False">
+    <button id="btn">Create new item</button>
+
+
+</body>
+
+<script>
+
+    var listId = document.getElementById("listId");
+    var description = document.getElementById("description");
+    var done = document.getElementById("done");
+    var btn = document.getElementById("btn");
+
+
+
+    //button click ---------------------------------
+    btn.onclick = function() {
+
+        var upload = JSON.stringify({
+            list_id: listId.value,
+            item_description: description.value,
+            done: done.value
+        });
+
+        var url = "http://localhost:3000/liste/item/";
+
+        var cfg = {
+            method: "POST",
+            body: upload
+
+        }
+
+        superfetch(url, "json", succ, error, cfg);
+
+    }
+
+    //success --------------------------------------
+    function succ(data) {
+        console.log(data); //Hello World!
+
+        for (var i = 0; i < data.length; i++) {
+            var div = document.createElement("div");
+            div.innerHTML += "<h3>Item ID: " + data[i].item_id + "</h3>";
+            div.innerHTML += "<h3>Liste ID: " + data[i].list_id + "</h3>";
+            div.innerHTML += "<h3>Item description: " + data[i].item_description + "</h3>";
+            div.innerHTML += "<h3>Done: " + data[i].done + "</h3>";
+
+            var hr = document.createElement("hr");
+            document.body.appendChild(div);
+            document.body.appendChild(hr);
+        }
+
+    }
+
+    //error ----------------------------------------
+    function error(err) {
+        console.log(err);
+    }
+
+
+
+
+</script>
+<style>
+
+    input, button, textarea, label {
+        width: 100%;
+        margin-bottom: 8px;
+        height: 40px;
+        font-size: 1.5em;
+        font-family: sans-serif;
+    }
+</style>
+
+
+</html>
