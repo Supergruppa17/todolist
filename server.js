@@ -14,20 +14,20 @@ app.use(function(req, res, next) {
 //route handling is delegated to:
 var list = require('./list.js');
 app.use('/liste/list/', list);
+
 var item = require('./item.js');
+
 app.use('/liste/item/', item);
 
+var users = require('./users.js');
+app.use('/liste/users/', users);
 
-//Not yet implemented:
-//var users = require('./users.js');
-//app.use('/travellog/users/', users);
+app.listen(process.env.PORT || 3000, function () {
+  console.log('Server listening on port 3000!');
+});
 
-/*app.listen(process.env.PORT || 3000, function () {
+/*var port = process.env.PORT || 3000;
+app.listen(port, function () {
   console.log('Server listening on port 3000!');
 });*/
-
-var port = process.env.PORT || 3000;
-app.listen(port, function () {
-  //console.log('Server listening on port 3000!');
-});
 

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>test Show List</title>
+    <script src="superfetch2.js"></script>
+</head>
+
+<body>
+    <input id="inpId">
+    <button id="btnDelete">Delete list</button>
+
+</body>
+
+<script>
+
+    var token = JSON.parse(localStorage.getItem("logindata")).token;
+    var url = "http://localhost:3000/liste/list/?token=" + token;
+
+
+    superfetch(url, "json", succ, error);
+
+
+    //success --------------------------------------
+    function succ(data) {
+
+        var inpId = document.getElementById("inpId");
+        var btnDelete = document.getElementById("btnDelete");
+
+        btnDelete.onclick = function() {
+
+            var token = JSON.parse(localStorage.getItem("logindata")).token;
+            var url = "http://localhost:3000/liste/list/?list_id=" + inpId.value + "&token=" + token; ;
+            superfetch(url, "json", delSucc, error, {method: "DELETE"});
+    }
+
+    //delete success -------------------------------
+    function delSucc(data) {
+        console.log(data);
+    }
+
+
+        console.log(data); //Hello World!
+
+        for (var i = 0; i < data.length; i++) {
+            var div = document.createElement("div");
+            div.innerHTML += "<h3>List ID: " + data[i].list_id + "</h3>";
+            div.innerHTML += "<h3>List name: " + data[i].list_name + "</h3>";
+            div.innerHTML += "<h3>User ID: " + data[i].user_id + "</h3>";
+            div.innerHTML += "<h3>Description: " + data[i].description + "</h3>";
+            div.innerHTML += "<h3>Delete: " + data[i].delete + "</h3>";
+            div.innerHTML += "<h3>Loginname: " + data[i].loginname + "</h3>";
+            var hr = document.createElement("hr");
+            document.body.appendChild(div);
+            document.body.appendChild(hr);
+    }
+
+    }
+
+    //error ----------------------------------------
+    function error(err) {
+        console.log(err);
+    }
+
+
+
+</script>
+
+</html>

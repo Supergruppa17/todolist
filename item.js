@@ -64,7 +64,5 @@ router.delete('/', function (req, res) {
     });
 });
 
-
-
 //export module -------------------------------------
 module.exports = router;
