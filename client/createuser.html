@@ -5,13 +5,18 @@
     <meta charset="utf-8" />
     <title>Create user</title>
     <script src="superfetch2.js"></script>
+	<link rel="stylesheet" type="text/css" href="login.css">
 </head>
 
 <body>
-
-    <input id="inpLoginname" placeholder="Loginname">
-    <input id="inpPassword" placeholder="Password">
-    <button id="btnCreate">Create new user</button>
+	<div id="form">
+		<h1>Create a new user</h1>
+		<hr id="linje">
+		<br>
+    	<input id="inpLoginname" placeholder="username">
+    	<input type="password" id="inpPassword" placeholder="password">
+    	<button id="btnCreate">create</button>
+	</div>
 
 
 </body>
@@ -25,12 +30,14 @@
     //button click ---------------------------------
     btnCreate.onclick = function() {
 
+        window.location.href = "login.html";
+
         var upload = JSON.stringify({
-            loginname: inpLoginname.value,
+            login_name: inpLoginname.value,
             password: inpPassword.value
         });
 
-        var url = "http://localhost:3000/liste/users/";
+        var url = "http://localhost:3000/todolist/users/";
 
         var cfg = {
             method: "POST",
@@ -55,16 +62,5 @@
 
 
 </script>
-<style>
-
-    input, button, textarea, label {
-        width: 100%;
-        margin-bottom: 8px;
-        height: 40px;
-        font-size: 1.5em;
-        font-family: sans-serif;
-    }
-</style>
-
 
 </html>

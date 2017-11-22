@@ -1,0 +1,161 @@
+
+body {
+	background: rgba(245, 132, 33, .87);
+	width: auto;
+}
+
+#form{
+	position: relative;
+	width: 50%;
+	margin: auto;
+}
+
+#inpListname, #inpDuedate, #inpLoginname, #listId, #listName, #inpName {
+	font-family: Century Gothic, sans-serif;
+	font-weight: lighter;
+	font-size: 1.25em;
+	padding: .55em;
+	width: 100%;
+	height: 40px;
+	margin-bottom: 1em;
+	border: none;
+
+}
+
+#inpListname::placeholder {
+	color: #aaaaaa;
+	position:relative;
+	padding:0;
+	transition: all 0.5s ease;
+}
+
+#inpDuedate[type=date] {
+	font-family: Century Gothic, sans-serif;
+	font-weight: lighter;
+	font-size: 1.25em;
+	padding: .55em;
+	width: 100%;
+	height: 40px;
+	margin-bottom: 1em;
+	border: none;
+	color: #aaaaaa;
+	position:relative;
+
+	transition: all 0.5s ease;
+}
+
+#inpLoginname::placeholder {
+	color: #aaaaaa;
+	position:relative;
+	padding:0;
+	transition: all 0.5s ease;
+}
+
+#listId::placeholder {
+	color: #aaaaaa;
+	position:relative;
+	padding:0;
+	transition: all 0.5s ease;
+}
+#listName::placeholder {
+		color: #aaaaaa;
+		position:relative;
+		padding:0;
+		transition: all 0.5s ease;
+}
+
+#inpName::placeholder {
+		color: #aaaaaa;
+		position:relative;
+		padding:0;
+		transition: all 0.5s ease;
+}
+
+#btnCreate {
+	font-family: Century Gothic, sans-serif;
+	font-weight: lighter;
+	color: rgba(255, 255, 255, 1);
+	width: 6em;
+	height: 2.5em;
+	font-size: 1.25em;
+	border: 1px solid rgba(255, 255, 255, .75);
+	background: transparent;
+	transition: all 200ms ease-in;
+	border-radius: .65em;
+}
+
+#btnCreate:hover {
+	background: #fff;
+	color: rgb(245, 132, 33);
+	border: none;
+}
+#btnNewuser {
+	font-family: Century Gothic, sans-serif;
+	font-weight: lighter;
+	color: rgba(255, 255, 255, 1);
+	width: 6em;
+	height: 2.5em;
+	font-size: 1.25em;
+	border: 1px solid rgba(255, 255, 255, .75);
+	background: transparent;
+	transition: all 200ms ease-in;
+	border-radius: .65em;
+
+}
+
+#btnNewuser:hover {
+	background: #fff;
+	color: rgb(245, 132, 33);
+	border: none;
+}
+
+#btn {
+	font-family: Century Gothic, sans-serif;
+	font-weight: lighter;
+	color: rgba(255, 255, 255, 1);
+	width: 10em;
+	height: 2.5em;
+	font-size: 1.25em;
+	border: 1px solid rgba(255, 255, 255, .75);
+	background: transparent;
+	transition: all 200ms ease-in;
+	border-radius: .65em;
+}
+
+#btn:hover {
+	background: #fff;
+	color: rgb(245, 132, 33);
+	border: none;
+}
+
+h1 {
+	font-size: 3em;
+	color: #fff;
+	font-family: Century Gothic, sans-serif;
+	font-weight: bold;
+}
+
+h2 {
+	font-family: Century Gothic, sans-serif;
+	font-weight: normal;
+	font-size: 2em;
+	text-align: left;
+	color: #fff;
+	margin-bottom: .5em;
+}
+
+h4 {
+	font-family: Century Gothic, sans-serif;
+	font-weight: 100;
+	color: #fff;
+	margin-top: 2em;
+	text-align: left;
+}
+
+hr {
+	height: .25em;
+	width: 100%;
+	background: #fff;
+	border: #fff;
+
+}

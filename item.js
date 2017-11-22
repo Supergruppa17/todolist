@@ -7,7 +7,11 @@ var bodyParser = require('body-parser').text();
 //endpoint: GET travels -----------------------------
 router.get('/', function (req, res) {
 
-    var sql = 'SELECT * FROM item';
+    var listid = req.query.listid;
+
+
+    var sql = `SELECT * FROM item WHERE list_id=${listid}`;
+
     db.any(sql).then(function(data) {
 
         res.status(200).json(data); //success – send the data as JSON!
@@ -23,11 +27,13 @@ router.post('/', bodyParser, function (req, res) {
 
     var upload = JSON.parse(req.body);
 
-    var sql = `PREPARE insert_items (int, int, text, boolean) AS
-                INSERT INTO item VALUES(DEFAULT, $2, $3, $4); EXECUTE insert_items
-                (0, '${upload.list_id}', '${upload.item_description}',
-                '${upload.done}')`;
 
+
+    var sql = `PREPARE insert_items (int, text, int, text) AS
+                INSERT INTO item VALUES(DEFAULT, $2, $3, $4); EXECUTE insert_items
+                (0, '${upload.item_name}', '${upload.list_id}', '${upload.list_name}')`;
+
+    console.log(sql);
     db.any(sql).then(function(data) {
 
 	db.any("DEALLOCATE insert_items");

@@ -5,56 +5,104 @@
     <meta charset="utf-8" />
     <title>test Show List</title>
     <script src="superfetch2.js"></script>
+	<link rel="stylesheet" type="text/css" href="showlist.css">
 </head>
 
 <body>
-    <input id="inpId">
-    <button id="btnDelete">Delete list</button>
+
+    <h1 id="txtName"></h1>
+	<hr>
+    <br>
+	<div id="form">
+		<button id="btnCreate">create new list</button>
+		<br>
+		<br>
+		<input id="inpId">
+		<button id="btnDelete">delete list</button>
+		<br>
+		<br>
+		<input id="inpIdOpen">
+		<button id="btnOpen" >open</button>
+	</div>
+	<hr>
+
 
 </body>
 
 <script>
 
-    var token = JSON.parse(localStorage.getItem("logindata")).token;
-    var url = "http://localhost:3000/liste/list/?token=" + token;
+    var txtName = document.getElementById("txtName");
 
+    var logindata = JSON.parse(localStorage.getItem("logindata"));
+    var url = "http://localhost:3000/todolist/list/?token=" + logindata.token;
+
+    txtName.innerHTML = "Logged in as: " + logindata.login_name;
 
     superfetch(url, "json", succ, error);
+
 
 
     //success --------------------------------------
     function succ(data) {
 
+
         var inpId = document.getElementById("inpId");
         var btnDelete = document.getElementById("btnDelete");
 
+        var inpIdOpen = document.getElementById("inpIdOpen");
+        var btnOpen = document.getElementById("btnOpen");
+        var btnCreate = document.getElementById("btnCreate");
+
+
+
+
+
+
         btnDelete.onclick = function() {
 
-            var token = JSON.parse(localStorage.getItem("logindata")).token;
-            var url = "http://localhost:3000/liste/list/?list_id=" + inpId.value + "&token=" + token; ;
-            superfetch(url, "json", delSucc, error, {method: "DELETE"});
-    }
+			window.location.href = "showlist.html";
 
-    //delete success -------------------------------
-    function delSucc(data) {
-        console.log(data);
-    }
+            var token = JSON.parse(localStorage.getItem("logindata")).token;
+            var url = "http://localhost:3000/todolist/list/?list_id=" + inpId.value + "&token=" + token; ;
+            superfetch(url, "json", delSucc, error, {method: "DELETE"});
+
+
+        }
+
+        btnOpen.onclick = function() {
+                console.log("Hei");
+
+
+                localStorage.setItem("listeinfo", inpIdOpen.value);
+
+                window.location.href = "showitem.html";
+
+        }
+        btnCreate.onclick = function() {
+            window.location.href = "createlist.html";
+        }
+
+        //delete success -------------------------------
+        function delSucc(data) {
+            console.log(data);
+        }
 
 
         console.log(data); //Hello World!
 
         for (var i = 0; i < data.length; i++) {
+			var d =  new Date(data[i].due_date).toDateString();
             var div = document.createElement("div");
+            div.innerHTML += "<h2>" + data[i].list_name + "</h2>";
             div.innerHTML += "<h3>List ID: " + data[i].list_id + "</h3>";
-            div.innerHTML += "<h3>List name: " + data[i].list_name + "</h3>";
-            div.innerHTML += "<h3>User ID: " + data[i].user_id + "</h3>";
-            div.innerHTML += "<h3>Description: " + data[i].description + "</h3>";
-            div.innerHTML += "<h3>Delete: " + data[i].delete + "</h3>";
-            div.innerHTML += "<h3>Loginname: " + data[i].loginname + "</h3>";
+            div.innerHTML += "<h3>Due date : " + d + "</h3>";
             var hr = document.createElement("hr");
+
             document.body.appendChild(div);
             document.body.appendChild(hr);
-    }
+        }
+
+
 
     }
 

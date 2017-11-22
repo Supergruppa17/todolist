@@ -5,17 +5,23 @@
     <meta charset="utf-8" />
     <title>Create List</title>
     <script src="superfetch2.js"></script>
+	<link rel="stylesheet" type="text/css" href="create.css">
 </head>
 
 <body>
 
-    <input id="inpListname" placeholder="List name">
-    <input id="inpDescription" placeholder="Description">
-    <input id="inpDelete" placeholder="True/false">
-    <input id="inpLoginname" placeholder="Loginname">
 
-    <button id="btnCreate">Create new list</button>
+	<div id="form">
+		<h1>Create a new list!</h1>
+		<hr id="linje">
+		<br>
+		<input id="inpListname" placeholder="list name">
+		<input type="date" id="inpDuedate">
 
+		<input id="inpLoginname" placeholder="username">
+
+		<button id="btnCreate">create</button>
+	</div>
 
 
 </body>
@@ -23,31 +29,29 @@
 <script>
 
     var inpListname = document.getElementById("inpListname");
-    var inpDescription = document.getElementById("inpDescription");
-    var inpDelete = document.getElementById("inpDelete");
+    var inpDuedate = document.getElementById("inpDuedate");
     var inpLoginname = document.getElementById("inpLoginname");
     var btnCreate = document.getElementById("btnCreate");
 
     //set current date and time as default value in the input-fields
-    /*var now =  new Date().toISOString().slice(0, -8) + "z";
-    inpStarttime.value = now;
-    inpEndtime.value = now;*/
+
+
 
     //button click ---------------------------------
     btnCreate.onclick = function() {
 
-        var token = JSON.parse(localStorage.getItem("logindata")).token;
+
+        var logindata = JSON.parse(localStorage.getItem("logindata"));
 
 
-        var url = "http://localhost:3000/liste/list/?token=" + token;
+        var url = "http://localhost:3000/todolist/list/?token=" + logindata.token;
         console.log(url);
 
 
         var upload = JSON.stringify({
             list_name: inpListname.value,
-            description: inpDescription.value,
-            delete: inpDelete.value,
-            loginname: inpLoginname.value
+            due_date: inpDuedate.value,
+            login_name: inpLoginname.value
         });
 
         //var url = "http://localhost:3000/liste/list/";
@@ -57,7 +61,10 @@
             body: upload
         }
 
+        window.location.href = "showlist.html";
+
         superfetch(url, "json", succ, error, cfg);
+
     }
 
 
@@ -65,6 +72,8 @@
     //success --------------------------------------
     function succ(data) {
         console.log(data); //Hello World!
+
+        window.location.href = "showlist.html";
     }
 
     //error ----------------------------------------
@@ -76,15 +85,7 @@
 
 </script>
 
-<style>
-    input, button, textarea, label {
-        width: 100%;
-        margin-bottom: 8px;
-        height: 40px;
-        font-size: 1.5em;
-        font-family: sans-serif;
-    }
-</style>
+
 
 
 </html>

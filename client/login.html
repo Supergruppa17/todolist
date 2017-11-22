@@ -5,13 +5,22 @@
     <meta charset="utf-8" />
     <title>Login</title>
     <script src="superfetch2.js"></script>
+	<link rel="stylesheet" type="text/css" href="login.css">
 </head>
 
 <body>
-
-    <input id="inpLoginname" placeholder="Loginname">
-    <input id="inpPassword" placeholder="Password">
-    <button id="btnCreate">Login</button>
+	<div id="form">
+		<img src="Logo_todolist.png">
+		<h1>Want to organize your life?</h1>
+		<hr>
+		<br>
+		<input id="inpLoginname" placeholder="username">
+		<input type="password" id="inpPassword" placeholder="password">
+		<button id="btnCreate">login</button>
+		<br>s
+		<h4>Don't have an account? We can fix that!</h4>
+		<button id="btnNewuser">signup</button>
+	</div>
 
 
 </body>
@@ -21,16 +30,18 @@
     var inpLoginname = document.getElementById("inpLoginname");
     var inpPassword = document.getElementById("inpPassword");
     var btnCreate = document.getElementById("btnCreate");
+	var btnNewuser = document.getElementById("btnNewuser");
 
     //button click ---------------------------------
     btnCreate.onclick = function() {
 
+
         var upload = JSON.stringify({
-            loginname: inpLoginname.value,
+            login_name: inpLoginname.value,
             password: inpPassword.value
         });
 
-        var url = "http://localhost:3000/liste/users/auth/";
+        var url = "http://localhost:3000/todolist/users/auth/";
 
         var cfg = {
             method: "POST",
@@ -38,13 +49,33 @@
         }
 
         superfetch(url, "json", succ, error, cfg);
+
     }
+
+
+	btnNewuser.onclick = function() {
+
+		console.log("hi");
+		window.location.href = "createuser.html";
+	}
+
 
     //success --------------------------------------
     function succ(data) {
 
+		console.log("hurra")
+
         //save logindata/token to localStorage
-        localStorage.setItem("logindata", JSON.stringify(data));
+
+        if(data.token) {
+
+            localStorage.setItem("logindata", JSON.stringify(data));
+            window.location.href = "showlist.html";
+        }
+         else {
+            txtMsg.innerHTML = "Something went wrong. Please try again later";
+		 }
+
     }
 
     //error ----------------------------------------
@@ -54,18 +85,8 @@
 
 
 
-
 </script>
-<style>
 
-    input, button, textarea, label {
-        width: 100%;
-        margin-bottom: 8px;
-        height: 40px;
-        font-size: 1.5em;
-        font-family: sans-serif;
-    }
-</style>
 
 
 </html>

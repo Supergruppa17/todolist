@@ -5,25 +5,50 @@
     <meta charset="utf-8" />
     <title>test client</title>
     <script src="superfetch2.js"></script>
+	<link rel="stylesheet" type="text/css" href="showitem.css">
 </head>
 
 <body>
+	<h1 id="txtName2"></h1>
+	<h2 id="txtName"></h2>
+	<hr>
+    <br>
+	<div id="form">
+		<button id="btnCreate">create new item</button>
+		<br>
+		<br>
+		<input id="inpId">
+		<button id="btnDelete">delete item</button>
+	</div>
+	<hr>
 
-    <input id="inpID" placeholder="ID">
-    <button id="btnDelete">Delete item</button>
 
 </body>
 
 <script>
 
-    var inpID = document.getElementById("inpID");
+    var txtName = document.getElementById("txtName");
+	var txtName2 = document.getElementById("txtName2");
+
+    var inpId = document.getElementById("inpId");
     var btnDelete = document.getElementById("btnDelete");
+    var btnCreate = document.getElementById("btnCreate");
 
-        btnDelete.onclick = function() {
+    var logData = localStorage.getItem("listeinfo");
 
-        var url = "http://localhost:3000/liste/item/?item_id=" + inpID.value;
+
+
+
+    console.log(logData)
+
+    btnDelete.onclick = function() {
+
+        var url = "http://localhost:3000/todolist/item/?item_id=" + inpId.value;
         superfetch(url, "json", delSucc, error, {method: "DELETE"});
     }
+    btnCreate.onclick = function() {
+            window.location.href = "createitem.html";
+        }
 
     //delete success -------------------------------
     function delSucc(data) {
@@ -32,22 +57,32 @@
 
 
 
-    var url = "http://localhost:3000/liste/item/";
+    var url = "http://localhost:3000/todolist/item/?listid=" + logData;
+
+    console.log(url)
+
+
     superfetch(url, "json", succ, error);
+
+
 
     //success --------------------------------------
     function succ(data) {
         console.log(data); //Hello World!
         for (var i = 0; i < data.length; i++) {
             var div = document.createElement("div");
+
+
             div.innerHTML += "<h3>Item ID: " + data[i].item_id + "</h3>";
-            div.innerHTML += "<h3>Liste ID: " + data[i].list_id + "</h3>";
-            div.innerHTML += "<h3>Item description: " + data[i].item_description + "</h3>";
-            div.innerHTML += "<h3>Done: " + data[i].done + "</h3>";
+            div.innerHTML += "<h3>Item name: " + data[i].item_name + "</h3>";
+
 
             var hr = document.createElement("hr");
             document.body.appendChild(div);
             document.body.appendChild(hr);
+
+			txtName.innerHTML = "List number: " + logData;
+			txtName2.innerHTML = data[i].list_name;
     }
 
     }

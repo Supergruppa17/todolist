@@ -5,23 +5,27 @@
     <meta charset="utf-8" />
     <title>test client</title>
     <script src="superfetch2.js"></script>
+	<link rel="stylesheet" type="text/css" href="create.css">
 </head>
 
 <body>
-
-    <input id="listId" placeholder="List ID">
-    <label for="inpDescr">Description:</label>
-    <input id="description" placeholder="Description">
-    <input id="done" placeholder="True/False">
-    <button id="btn">Create new item</button>
-
+	<div id="form">
+		<h1>Create a new item!</h1>
+		<hr id="linje">
+		<br>
+		<input id="listId" placeholder="list id">
+		<input id="listName" placeholder="list name">
+		<input id="inpName" placeholder="item">
+		<button id="btn">create</button>
+	</div>
 
 </body>
 
 <script>
 
     var listId = document.getElementById("listId");
-    var description = document.getElementById("description");
+    var listName = document.getElementById("listName");
+    var inpName = document.getElementById("inpName");
     var done = document.getElementById("done");
     var btn = document.getElementById("btn");
 
@@ -31,12 +35,13 @@
     btn.onclick = function() {
 
         var upload = JSON.stringify({
+            item_name: inpName.value,
             list_id: listId.value,
-            item_description: description.value,
-            done: done.value
+            list_name: listName.value
         });
+        console.log(upload);
 
-        var url = "http://localhost:3000/liste/item/";
+        var url = "http://localhost:3000/todolist/item/";
 
         var cfg = {
             method: "POST",
@@ -50,14 +55,18 @@
 
     //success --------------------------------------
     function succ(data) {
+
+        window.location.href = "showitem.html";
+
         console.log(data); //Hello World!
 
         for (var i = 0; i < data.length; i++) {
             var div = document.createElement("div");
+             div.innerHTML += "<h3>List ID: " + data[i].list_id + "</h3>";
+            div.innerHTML += "<h3>List name: " + data[i].list_name + "</h3>";
             div.innerHTML += "<h3>Item ID: " + data[i].item_id + "</h3>";
-            div.innerHTML += "<h3>Liste ID: " + data[i].list_id + "</h3>";
-            div.innerHTML += "<h3>Item description: " + data[i].item_description + "</h3>";
-            div.innerHTML += "<h3>Done: " + data[i].done + "</h3>";
+            div.innerHTML += "<h3>Item name: " + data[i].item_name + "</h3>";
+
 
             var hr = document.createElement("hr");
             document.body.appendChild(div);
@@ -75,16 +84,7 @@
 
 
 </script>
-<style>
 
-    input, button, textarea, label {
-        width: 100%;
-        margin-bottom: 8px;
-        height: 40px;
-        font-size: 1.5em;
-        font-family: sans-serif;
-    }
-</style>
 
 
 </html>

@@ -13,14 +13,13 @@ app.use(function(req, res, next) {
 // -----------------------------------------------
 //route handling is delegated to:
 var list = require('./list.js');
-app.use('/liste/list/', list);
+app.use('/todolist/list/', list);
 
 var item = require('./item.js');
-
-app.use('/liste/item/', item);
+app.use('/todolist/item/', item);
 
 var users = require('./users.js');
-app.use('/liste/users/', users);
+app.use('/todolist/users/', users);
 
 app.listen(process.env.PORT || 3000, function () {
   console.log('Server listening on port 3000!');

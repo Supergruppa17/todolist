@@ -23,14 +23,18 @@ router.get('/', function (req, res) {
 
 router.post('/', bodyParser, function (req, res) {
 
-    console.log("inne i user post");
+
 
     var upload = JSON.parse(req.body);  //should be sanitized
     var encrPassw = bcrypt.hashSync(upload.password, 10); //hash the password
 
     var sql = `PREPARE insert_user (int, text, text) AS
                 INSERT INTO users VALUES(DEFAULT, $2, $3); EXECUTE insert_user
-                (0, '${upload.loginname}', '${encrPassw}')`;
+                (0, '${upload.login_name}', '${encrPassw}')`;
+
+
+
+    console.log(sql);
 
 
     db.any(sql).then(function(data) {
@@ -38,11 +42,11 @@ router.post('/', bodyParser, function (req, res) {
         db.any("DEALLOCATE insert_user");
 
         //create the token
-        var payload = {loginname: upload.loginname};
+        var payload = {login_name: upload.login_name};
         var tok = jwt.sign(payload, secret, {expiresIn: "12h"});
 
         //send logininfo + token to the client
-        res.status(200).json({loginname: upload.loginname, token: tok});
+        res.status(200).json({login_name: upload.login_name, token: tok});
 
     }).catch(function(err) {
 
@@ -57,8 +61,8 @@ router.post('/auth/', bodyParser, function (req, res) {
     var upload = JSON.parse(req.body); //should be sanitized
 
     var sql = `PREPARE get_user (text) AS
-                    SELECT * FROM users WHERE loginname=$1;
-                    EXECUTE get_user('${upload.loginname}')`;
+                    SELECT * FROM users WHERE login_name=$1;
+                    EXECUTE get_user('${upload.login_name}')`;
 
     db.any(sql).then(function(data) {
 
@@ -82,11 +86,11 @@ router.post('/auth/', bodyParser, function (req, res) {
         }
 
         //we have a valid user -> create the token
-        var payload = {loginname: data[0].loginname, fullname: data[0].fullname};
+        var payload = {login_name: data[0].login_name, fullname: data[0].fullname};
         var tok = jwt.sign(payload, secret, {expiresIn: "12h"});
 
         //send logininfo + token to the client
-        res.status(200).json({loginname: data[0].loginname, fullname: data[0].fullname, token: tok});
+        res.status(200).json({login_name: data[0].login_name, fullname: data[0].fullname, token: tok});
 
     }).catch(function(err) {
 

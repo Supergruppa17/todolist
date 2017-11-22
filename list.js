@@ -36,8 +36,8 @@ router.use(function (req, res, next) {
 router.get('/', function (req, res) {
 
     var sql = `PREPARE get_lists (text) AS
-            SELECT * FROM list WHERE loginname=$1;
-            EXECUTE get_lists('${logindata.loginname}')`;
+            SELECT * FROM list WHERE login_name=$1;
+            EXECUTE get_lists('${logindata.login_name}')`;
 
 
     db.any(sql).then(function(data) {
@@ -57,9 +57,9 @@ router.post('/', bodyParser, function (req, res) {
     var upload = JSON.parse(req.body);
 
 
-    var sql = `PREPARE insert_lists (int, text, int, text, boolean, text) AS
-                INSERT INTO list VALUES(DEFAULT, $2, $3, $4, $5, $6); EXECUTE insert_lists
-                (0, '${upload.list_name}', 0, '${upload.description}', '${upload.delete}', '${upload.loginname}')`;
+    var sql = `PREPARE insert_lists (int, text, date, text) AS
+                INSERT INTO list VALUES(DEFAULT, $2, $3, $4); EXECUTE insert_lists
+                (0, '${upload.list_name}', '${upload.due_date}', '${upload.login_name}')`;
 
 
 
@@ -79,8 +79,8 @@ router.delete('/', function (req, res) {
     var upload = req.query.list_id; //uploaded data should be sanitized
 
     var sql = `PREPARE delete_lists (int, text) AS
-            DELETE FROM list WHERE list_id=$1 AND loginname=$2 RETURNING *;
-            EXECUTE delete_lists('${upload}','${logindata.loginname}')`;
+            DELETE FROM list WHERE list_id=$1 AND login_name=$2 RETURNING *;
+            EXECUTE delete_lists('${upload}','${logindata.login_name}')`;
 
      console.log(sql);
 
