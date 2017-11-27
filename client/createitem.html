@@ -3,20 +3,23 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>test client</title>
+    <title>Create item</title>
     <script src="superfetch2.js"></script>
 	<link rel="stylesheet" type="text/css" href="create.css">
 </head>
 
 <body>
+
 	<div id="form">
+
 		<h1>Create a new item!</h1>
 		<hr id="linje">
 		<br>
-		<input id="listId" placeholder="list id">
+		<input id="listId" type="text" placeholder="list id">
 		<input id="listName" placeholder="list name">
 		<input id="inpName" placeholder="item">
-		<button id="btn">create</button>
+		<button id="btnCreate">create</button>
+
 	</div>
 
 </body>
@@ -27,18 +30,19 @@
     var listName = document.getElementById("listName");
     var inpName = document.getElementById("inpName");
     var done = document.getElementById("done");
-    var btn = document.getElementById("btn");
+    var btnCreate = document.getElementById("btnCreate");
 
 
 
     //button click ---------------------------------
-    btn.onclick = function() {
+    btnCreate.onclick = function() {
 
         var upload = JSON.stringify({
             item_name: inpName.value,
             list_id: listId.value,
             list_name: listName.value
         });
+
         console.log(upload);
 
         var url = "http://localhost:3000/todolist/item/";
@@ -60,18 +64,6 @@
 
         console.log(data); //Hello World!
 
-        for (var i = 0; i < data.length; i++) {
-            var div = document.createElement("div");
-             div.innerHTML += "<h3>List ID: " + data[i].list_id + "</h3>";
-            div.innerHTML += "<h3>List name: " + data[i].list_name + "</h3>";
-            div.innerHTML += "<h3>Item ID: " + data[i].item_id + "</h3>";
-            div.innerHTML += "<h3>Item name: " + data[i].item_name + "</h3>";
-
-
-            var hr = document.createElement("hr");
-            document.body.appendChild(div);
-            document.body.appendChild(hr);
-        }
 
     }
 

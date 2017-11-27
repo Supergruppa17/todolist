@@ -1,6 +1,7 @@
 focus {
-outline: none;
+	outline: none;
 }
+
 body {
 	background: rgba(245, 132, 33, .87);
 	width: auto;
@@ -8,24 +9,9 @@ body {
 
 #form{
 	position: relative;
-	width: 30%;
-}
+	width: 50%;
 
-#inpId, #inpIdOpen {
-	font-family: Century Gothic, sans-serif;
-	font-weight: lighter;
-	font-size: 1.25em;
-	padding: .55em;
-	width: 62%;
-	height: 40px;
-	margin-bottom: 1em;
-	border: none;
-}
-#inpId:focus {
-	outline: none;
-}
-#inpIdOpen:focus {
-	outline: none;
+
 }
 
 #btnCreate {
@@ -33,62 +19,39 @@ body {
 	font-weight: lighter;
 	color: rgba(255, 255, 255, 1);
 	width: 100%;
-	height: 2.5em;
-	font-size: 1.25em;
+	height: 50px;
+	font-size: 20px;
 	border: 1px solid rgba(255, 255, 255, .75);
 	background: transparent;
-	transition: all 200ms ease-in;
-	border-radius: .65em;
+
+
+
 }
 
 #btnCreate:hover {
 	background: #fff;
 	color: rgb(245, 132, 33);
 	border: none;
-}
-#btnCreate:focus {
-	outline: none;
-}
-#btnDelete, #btnOpen{
-	font-family: Century Gothic, sans-serif;
-	font-weight: lighter;
-	color: rgba(255, 255, 255, 1);
-	width: 6em;
-	height: 2.5em;
-	font-size: 1.25em;
-	border: 1px solid rgba(255, 255, 255, .75);
-	background: transparent;
-	transition: all 200ms ease-in;
-	border-radius: .65em;
-}
-#btnDelete:hover{
-	background: #fff;
-	color: rgb(245, 132, 33);
-	border: none;
-}
-#btnDelete:focus {
-	outline: none;
-}
-#btnOpen:hover {
-	background: #fff;
-	color: rgb(245, 132, 33);
-	border: none;
+	text-transform: uppercase;
 }
 
-#btnOpen:focus {
+#btnCreate:focus {
 	outline: none;
 }
 
 h1 {
-	font-size: 3em;
+	font-size: 45px;
 	color: #fff;
 	font-family: Century Gothic, sans-serif;
-	font-weight: bold;
+	font-weight: bolder;
+	text-transform: uppercase;
+
 }
+
 h2 {
 	font-family: Century Gothic, sans-serif;
-	font-weight: normal;
-	font-size: 2em;
+	font-weight: bold;
+	font-size: 30px;
 	text-align: left;
 	color: #fff;
 
@@ -102,9 +65,5 @@ h3 {
 }
 
 hr {
-	height: .25em;
-	width: 100%;
-	background: #fff;
-	border: #fff;
-
+	border: 1px solid rgba(255, 255, 255, .75);
 }

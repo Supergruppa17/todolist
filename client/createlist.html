@@ -10,16 +10,14 @@
 
 <body>
 
-
 	<div id="form">
+
 		<h1>Create a new list!</h1>
 		<hr id="linje">
 		<br>
 		<input id="inpListname" placeholder="list name">
 		<input type="date" id="inpDuedate">
-
 		<input id="inpLoginname" placeholder="username">
-
 		<button id="btnCreate">create</button>
 	</div>
 
@@ -39,6 +37,8 @@
 
     //button click ---------------------------------
     btnCreate.onclick = function() {
+
+		window.location.href = "showlist.html";
 
 
         var logindata = JSON.parse(localStorage.getItem("logindata"));
@@ -61,7 +61,7 @@
             body: upload
         }
 
-        window.location.href = "showlist.html";
+
 
         superfetch(url, "json", succ, error, cfg);
 
@@ -73,7 +73,7 @@
     function succ(data) {
         console.log(data); //Hello World!
 
-        window.location.href = "showlist.html";
+       // window.location.href = "showlist.html";
     }
 
     //error ----------------------------------------

@@ -1,7 +1,7 @@
 
 body {
 	background: rgba(245, 132, 33, .87);
-	width: auto;
+  	width: auto;
 }
 
 #form {
@@ -11,7 +11,14 @@ body {
 	margin-top: 175px;
 }
 
-#inpListname, #inpDuedate, #inpLoginname, #listId, #listName, #inpName {
+img{
+	width: 50%;
+	margin-left: 20%;
+	margin-top: 5px;
+
+}
+
+#inpLoginname, #inpPassword {
 	font-family: Century Gothic, sans-serif;
 	font-weight: lighter;
 	font-size: 20px;
@@ -20,47 +27,26 @@ body {
 	margin-bottom: 20px;
 	border: none;
 	text-align: center;
-
-}
-
-#inpListname::placeholder {
-	color: #aaaaaa;
-	position:relative;
-}
-
-#inpDuedate[type=date] {
-	font-family: Century Gothic, sans-serif;
-	font-weight: lighter;
-	font-size: 20px;
-	width: 100%;
-	height: 50px;
-	margin-bottom: 20px;
-	border: none;
-	color: #aaaaaa;
-	position:relative;
 }
 
 #inpLoginname::placeholder {
 	color: #aaaaaa;
 	position:relative;
-
+	text-align: center;
 }
 
-#listId::placeholder {
+#inpLoginname:focus {
+	outline: none;
+}
+
+#inpPassword::placeholder {
 	color: #aaaaaa;
 	position:relative;
-
-}
-#listName::placeholder {
-		color: #aaaaaa;
-		position:relative;
-
+	text-align: center;
 }
 
-#inpName::placeholder {
-		color: #aaaaaa;
-		position:relative;
-
+#inpPassword:focus {
+	outline: none;
 }
 
 #btnCreate {
@@ -73,16 +59,18 @@ body {
 	border: none;
 	border-bottom: 1px solid rgba(255, 255, 255, .75);
 	background: transparent ;
-
-
-
 }
 
-
-#btnCreate:hover {
+#btnCreate:hover{
 	text-transform: uppercase;
-	border: none;
+    border: none;
 }
+#btnCreate:focus {
+	outline: none;
+}
+
+
+
 h1 {
 	font-size: 45px;
 	color: #fff;
@@ -90,7 +78,6 @@ h1 {
 	font-weight: bold;
 	text-align: center;
 }
-
 
 hr {
 

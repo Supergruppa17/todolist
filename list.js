@@ -36,7 +36,7 @@ router.use(function (req, res, next) {
 router.get('/', function (req, res) {
 
     var sql = `PREPARE get_lists (text) AS
-            SELECT * FROM list WHERE login_name=$1;
+            SELECT * FROM list WHERE login_name=$1 ORDER BY due_date;
             EXECUTE get_lists('${logindata.login_name}')`;
 
 

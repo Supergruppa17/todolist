@@ -9,17 +9,21 @@
 </head>
 
 <body>
+
 	<div id="form">
-		<img src="Logo_todolist.png">
+
+
 		<h1>Want to organize your life?</h1>
 		<hr>
 		<br>
 		<input id="inpLoginname" placeholder="username">
 		<input type="password" id="inpPassword" placeholder="password">
-		<button id="btnCreate">login</button>
-		<br>s
-		<h4>Don't have an account? We can fix that!</h4>
-		<button id="btnNewuser">signup</button>
+		<button id="btnLogin">login</button>
+		<br>
+		<br>
+		<h3>Don't have an account?</h3>
+		<button id="btnSignup">signup</button>
+
 	</div>
 
 
@@ -29,12 +33,11 @@
 
     var inpLoginname = document.getElementById("inpLoginname");
     var inpPassword = document.getElementById("inpPassword");
-    var btnCreate = document.getElementById("btnCreate");
-	var btnNewuser = document.getElementById("btnNewuser");
+    var btnLogin = document.getElementById("btnLogin");
+	var btnSignup = document.getElementById("btnSignup");
 
     //button click ---------------------------------
-    btnCreate.onclick = function() {
-
+    btnLogin.onclick = function() {
 
         var upload = JSON.stringify({
             login_name: inpLoginname.value,
@@ -53,7 +56,7 @@
     }
 
 
-	btnNewuser.onclick = function() {
+	btnSignup.onclick = function() {
 
 		console.log("hi");
 		window.location.href = "createuser.html";

@@ -3,33 +3,105 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>test Show List</title>
+    <title>Show List</title>
     <script src="superfetch2.js"></script>
+	<script src="superlist.js"></script>
 	<link rel="stylesheet" type="text/css" href="showlist.css">
+	<link href="superlist.css" rel="stylesheet" />
+
+
 </head>
 
 <body>
 
-    <h1 id="txtName"></h1>
+
+
+	<h1 id="txtUsername"></h1>
 	<hr>
-    <br>
 	<div id="form">
+		<br>
 		<button id="btnCreate">create new list</button>
 		<br>
 		<br>
-		<input id="inpId">
-		<button id="btnDelete">delete list</button>
-		<br>
-		<br>
-		<input id="inpIdOpen">
-		<button id="btnOpen" >open</button>
+
+
 	</div>
-	<hr>
 
 
 </body>
 
 <script>
+
+	var btnCreate = document.getElementById("btnCreate");
+	var txtUsername = document.getElementById("txtUsername")
+
+    var mylist = superlist();
+    document.body.appendChild(mylist);
+
+	var logindata = JSON.parse(localStorage.getItem("logindata"));
+
+	var url = "http://localhost:3000/todolist/list/?token=" + logindata.token;
+
+	txtUsername.innerHTML = "Logged in as: " + logindata.login_name;
+
+	console.log(url);
+    //load the JSON-data (array)
+    superfetch(url, "json", succ, error);
+
+	btnCreate.onclick = function() {
+
+            window.location.href = "createlist.html";
+        }
+
+	function succ(data) {
+
+        //retrieving the categories from the data-array and fill the list
+
+		for (var i = 0; i < data.length; i++) {
+
+			var d =  new Date(data[i].due_date).toDateString();
+
+			var listname = data[i].list_name;
+			var listid = data[i].list_id;
+
+            var html = "<h2>" + listname + "</h2>";
+			html += "<h3> Due by: " + d + "</h3>";
+			//html += "<p>" + listid + "</p>";
+
+
+
+            mylist.addElement(html, listid);
+
+			//register event handler
+			mylist.addEventListener("change", onlistchange);
+    	}
+
+
+	}
+
+    //fail -------------------------------------------------
+    function error(error) {
+        console.log(error);
+    }
+
+    //onlistchange -----------------------------------------
+    function onlistchange(evt) {
+
+        var div = evt.selectedValue;
+
+        ///////////////////////////////////////// Lagrer den knappen man har trykket på
+        localStorage.setItem("listId", div);
+        // Dataen om knappen skal vises frem i "showPlants.html"
+        window.location.href="showitem.html";
+
+
+    }
+
+
+
+
+
+	/*
 
     var txtName = document.getElementById("txtName");
 
@@ -48,15 +120,9 @@
 
         var inpId = document.getElementById("inpId");
         var btnDelete = document.getElementById("btnDelete");
-
         var inpIdOpen = document.getElementById("inpIdOpen");
         var btnOpen = document.getElementById("btnOpen");
         var btnCreate = document.getElementById("btnCreate");
-
-
-
-
-
 
         btnDelete.onclick = function() {
 
@@ -65,19 +131,17 @@
             var token = JSON.parse(localStorage.getItem("logindata")).token;
             var url = "http://localhost:3000/todolist/list/?list_id=" + inpId.value + "&token=" + token; ;
             superfetch(url, "json", delSucc, error, {method: "DELETE"});
-
-
         }
 
         btnOpen.onclick = function() {
-                console.log("Hei");
 
+			console.log("Hei");
 
-                localStorage.setItem("listeinfo", inpIdOpen.value);
-
-                window.location.href = "showitem.html";
+			localStorage.setItem("listeinfo", inpIdOpen.value);
+			window.location.href = "showitem.html";
 
         }
+
         btnCreate.onclick = function() {
             window.location.href = "createlist.html";
         }
@@ -87,10 +151,8 @@
             console.log(data);
         }
 
-
-        console.log(data); //Hello World!
-
         for (var i = 0; i < data.length; i++) {
+
 			var d =  new Date(data[i].due_date).toDateString();
             var div = document.createElement("div");
             div.innerHTML += "<h2>" + data[i].list_name + "</h2>";
@@ -101,15 +163,14 @@
             document.body.appendChild(div);
             document.body.appendChild(hr);
         }
-
-
-
     }
 
     //error ----------------------------------------
     function error(err) {
         console.log(err);
     }
+
+	*/
 
 
 

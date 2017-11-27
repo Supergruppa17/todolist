@@ -3,64 +3,135 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>test client</title>
+    <title>Show item</title>
     <script src="superfetch2.js"></script>
+	<script src="superlist.js"></script>
 	<link rel="stylesheet" type="text/css" href="showitem.css">
+	<link rel="stylesheet" type="text/css" href="superlist.css">
 </head>
 
 <body>
-	<h1 id="txtName2"></h1>
-	<h2 id="txtName"></h2>
+
+
+	<h1 id="txtListname"></h1>
+	<h3 id="txtListid"></h3>
 	<hr>
-    <br>
+
+
 	<div id="form">
+		<br>
+		<button id="btnBack">back</button>
+		<button id="btnDelete">delete list</button>
 		<button id="btnCreate">create new item</button>
 		<br>
-		<br>
-		<input id="inpId">
-		<button id="btnDelete">delete item</button>
 	</div>
-	<hr>
+
+
 
 
 </body>
 
 <script>
 
-    var txtName = document.getElementById("txtName");
-	var txtName2 = document.getElementById("txtName2");
 
+	var btnDelete = document.getElementById("btnDelete");
+    var btnCreate = document.getElementById("btnCreate");
+	var btnBack = document.getElementById("btnBack");
+	var txtListname = document.getElementById("txtListname");
+	var txtListid = document.getElementById("txtListid");
+
+	var mylist = superlist();
+    document.body.appendChild(mylist);
+
+	var listId = localStorage.getItem("listId");
+
+    ///////////// Henter ut data fra lokaldata om knappen som er trykket på
+	var url = "http://localhost:3000/todolist/item/?listid=" + listId;
+
+	txtListid.innerHTML = "List number: " + listId;
+	txtListname.innerHTML = "List name: "
+    ;
+
+    //load the JSON-data (array)
+    superfetch(url, "json", success, error);
+
+
+
+	btnBack.onclick = function() {
+		window.location.href = "showlist.html";
+	}
+
+	btnCreate.onclick = function() {
+
+		window.location.href = "createitem.html";
+    }
+
+	 btnDelete.onclick = function() {
+
+			window.location.href = "showlist.html";
+
+            var token = JSON.parse(localStorage.getItem("logindata")).token;
+            var url = "http://localhost:3000/todolist/list/?list_id=" + listId + "&token=" + token;
+            superfetch(url, "json", delSucc, error, {method: "DELETE"});
+        }
+
+	 //delete success -------------------------------
+        function delSucc(data) {
+            console.log(data);
+		}
+
+	function success(data) {
+
+		console.log(data);
+
+		for (var i = 0; i < data.length; i++) {
+			var itemId = data[i].item_id;
+			var itemName = data[i].item_name;
+            var html = "<h2>" + itemName + "</h2>";
+
+            mylist.addElement(html, itemId,itemName);
+        }
+
+		mylist.addEventListener("remove", onlistchange);
+
+
+	}
+
+
+	function error(error) {
+        console.log(error);
+    }
+
+	function onlistchange(evt){
+
+		window.location.href = "showitem.html"
+
+		var div = evt.selectedValue;
+		localStorage.setItem("itemId", div);
+		var token = JSON.parse(localStorage.getItem("logindata")).token;
+		var itemId = localStorage.getItem("itemId");
+        var url = "http://localhost:3000/todolist/item/?item_id=" + itemId + "&token=" + token;
+        superfetch(url, "json", delSucc, error, {method: "DELETE"});
+
+	}
+
+
+
+	/*
+
+	var txtName = document.getElementById("txtName");
+	var txtName2 = document.getElementById("txtName2");
     var inpId = document.getElementById("inpId");
     var btnDelete = document.getElementById("btnDelete");
     var btnCreate = document.getElementById("btnCreate");
+	var btnBack = document.getElementById("btnBack");
 
     var logData = localStorage.getItem("listeinfo");
-
-
-
-
-    console.log(logData)
-
-    btnDelete.onclick = function() {
-
-        var url = "http://localhost:3000/todolist/item/?item_id=" + inpId.value;
-        superfetch(url, "json", delSucc, error, {method: "DELETE"});
-    }
-    btnCreate.onclick = function() {
-            window.location.href = "createitem.html";
-        }
-
-    //delete success -------------------------------
-    function delSucc(data) {
-        console.log(data);
-    }
-
 
 
     var url = "http://localhost:3000/todolist/item/?listid=" + logData;
 
     console.log(url)
-
 
     superfetch(url, "json", succ, error);
 
@@ -69,28 +140,58 @@
     //success --------------------------------------
     function succ(data) {
         console.log(data); //Hello World!
+
+		txtName.innerHTML = "List number: " + logData;
+		txtName2.innerHTML = "List name: ";
+
+
+
+    console.log(logData)
+
+    btnDelete.onclick = function() {
+
+		window.location.href = "showitem.html";
+
+		var url = "http://localhost:3000/todolist/item/?item_id=" + inpId.value;
+        superfetch(url, "json", delSucc, error, {method: "DELETE"});
+    }
+
+    btnCreate.onclick = function() {
+
+		window.location.href = "createitem.html";
+    }
+
+	btnBack.onclick = function() {
+
+	}
+
+    //delete success -------------------------------
+    function delSucc(data) {
+        console.log(data);
+    }
+
         for (var i = 0; i < data.length; i++) {
+
             var div = document.createElement("div");
-
-
+			div.innerHTML += "<h2>" + data[i].item_name + "</h2>";
             div.innerHTML += "<h3>Item ID: " + data[i].item_id + "</h3>";
-            div.innerHTML += "<h3>Item name: " + data[i].item_name + "</h3>";
-
-
             var hr = document.createElement("hr");
+
             document.body.appendChild(div);
             document.body.appendChild(hr);
 
-			txtName.innerHTML = "List number: " + logData;
-			txtName2.innerHTML = data[i].list_name;
-    }
+			//txtName2.innerHTML += data[i].list_name;
 
+
+    	}
     }
 
     //error ----------------------------------------
     function error(err) {
         console.log(err);
     }
+
+	*/
 
 
 

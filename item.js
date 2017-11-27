@@ -8,6 +8,8 @@ var bodyParser = require('body-parser').text();
 router.get('/', function (req, res) {
 
     var listid = req.query.listid;
+	var itemid = req.query.itemid;
+	//var listname = req.query.listname;
 
 
     var sql = `SELECT * FROM item WHERE list_id=${listid}`;
