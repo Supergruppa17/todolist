@@ -23,9 +23,6 @@ body {
 	font-size: 20px;
 	border: 1px solid rgba(255, 255, 255, .75);
 	background: transparent;
-
-
-
 }
 
 #btnCreate:hover {
@@ -33,6 +30,7 @@ body {
 	color: rgb(245, 132, 33);
 	border: none;
 	text-transform: uppercase;
+	cursor: pointer;
 }
 
 #btnCreate:focus {
@@ -66,4 +64,99 @@ h3 {
 
 hr {
 	border: 1px solid rgba(255, 255, 255, .75);
+}
+#tittel {
+	font-size: 45px;
+	color: #fff;
+	font-family: Century Gothic, sans-serif;
+	font-weight: bold;
+	text-align: center;
+}
+#inpListname, #inpDuedate, #inpLoginname {
+	font-family: Century Gothic, sans-serif;
+	font-weight: lighter;
+	font-size: 20px;
+	width: 100%;
+	height: 50px;
+	margin-bottom: 20px;
+	border: none;
+	text-align: center;
+
+}
+#inpListname, #inpDuedate, #inpLoginname:focus {
+	outline: none;
+}
+
+#inpListname::placeholder {
+	color: #aaaaaa;
+	position:relative;
+}
+
+#inpDuedate[type=date] {
+	font-family: Century Gothic, sans-serif;
+	font-weight: lighter;
+	font-size: 20px;
+	width: 99.9%;
+	height: 50px;
+	margin-bottom: 20px;
+	border: none;
+	color: #aaaaaa;
+	position:relative;
+}
+
+#inpLoginname::placeholder {
+	color: #aaaaaa;
+	position:relative;
+
+}
+
+#listId::placeholder {
+	color: #aaaaaa;
+	position:relative;
+
+}
+#listName::placeholder {
+		color: #aaaaaa;
+		position:relative;
+
+}
+
+#inpName::placeholder {
+		color: #aaaaaa;
+		position:relative;
+
+}
+
+#btnCreatelist {
+	font-family: Century Gothic, sans-serif;
+	font-weight: lighter;
+	color: rgba(255, 255, 255, 1);
+	width: 100%;
+	height: 50px;
+	font-size: 20px;
+	border: none;
+	border-bottom: 1px solid rgba(255, 255, 255, .75);
+	background: transparent ;
+}
+#btnCreatelist:hover {
+	text-transform: uppercase;
+	border: none;
+	cursor: pointer;
+}
+#btnCreatelist:focus {
+	outline: none;
+}
+#dropdown {
+	font-family: Century Gothic, sans-serif;
+	font-weight: lighter;
+	font-size: 20px;
+	width: 100%;
+	height: 50px;
+	border: none;
+	text-align: center;
+	margin-bottom: 20px;
+	text-align: center;
+}
+#dropdown:focus{
+	outline:none;
 }

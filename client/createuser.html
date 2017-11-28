@@ -18,6 +18,7 @@
     	<input id="inpLoginname" placeholder="username">
     	<input type="password" id="inpPassword" placeholder="password">
     	<button id="btnCreate">create</button>
+		<p id="wrongInput"></p>
 
 	</div>
 
@@ -29,6 +30,7 @@
     var inpLoginname = document.getElementById("inpLoginname");
     var inpPassword = document.getElementById("inpPassword");
     var btnCreate = document.getElementById("btnCreate");
+	var wrongInput = document.getElementById("wrongInput");
 
     //button click ---------------------------------
     btnCreate.onclick = function() {
@@ -48,18 +50,21 @@
         }
 
         superfetch(url, "json", succ, error, cfg);
+
+
     }
 
     //success --------------------------------------
     function succ(data) {
 
-        //save logindata/token to localStorage
-        localStorage.setItem("logindata", JSON.stringify(data));
+
     }
 
     //error ----------------------------------------
     function error(err) {
         console.log(err);
+
+		wrongInput.innerHTML = "Username alredy exists. Pick another!";
     }
 
 

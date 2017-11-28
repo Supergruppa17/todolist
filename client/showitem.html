@@ -8,13 +8,13 @@
 	<script src="superlist.js"></script>
 	<link rel="stylesheet" type="text/css" href="showitem.css">
 	<link rel="stylesheet" type="text/css" href="superlist.css">
+	<link rel="stylesheet" type="text/css" href="popup.css">
 </head>
 
 <body>
 
 
 	<h1 id="txtListname"></h1>
-	<h3 id="txtListid"></h3>
 	<hr>
 
 
@@ -24,72 +24,152 @@
 		<button id="btnDelete">delete list</button>
 		<button id="btnCreate">create new item</button>
 		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+
 	</div>
 
+	<div id="myModal" class="modal">
 
+		<!-- Modal content -->
+	  	<div class="modal-content">
 
+    		<span class="close">&times;</span>
+			<h1 id="tittel">Create a new item!</h1>
+			<hr id="linje">
+			<br>
+			<select id = "dropdown"></select>
+			<input id="inpItem" placeholder="item">
+			<button id="btnCreateitem">create</button>
+
+		</div>
+	</div>
 
 </body>
 
 <script>
 
 
+	var txtListname = document.getElementById("txtListname");
+
+	var btnBack = document.getElementById("btnBack");
 	var btnDelete = document.getElementById("btnDelete");
     var btnCreate = document.getElementById("btnCreate");
-	var btnBack = document.getElementById("btnBack");
-	var txtListname = document.getElementById("txtListname");
-	var txtListid = document.getElementById("txtListid");
+
+	var modal = document.getElementById('myModal');
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	var dropdown = document.getElementById("dropdown");
+	var inpItem = document.getElementById("inpItem");
+	var btnCreateitem = document.getElementById("btnCreateitem");
+
+
 
 	var mylist = superlist();
     document.body.appendChild(mylist);
 
-	var listId = localStorage.getItem("listId");
+	var logindata = JSON.parse(localStorage.getItem("logindata"));
+
+	var listedata = JSON.parse(localStorage.getItem("listId"));
+
+	filldropdown();
+
 
     ///////////// Henter ut data fra lokaldata om knappen som er trykket på
-	var url = "http://localhost:3000/todolist/item/?listid=" + listId;
+	var url = "http://localhost:3000/todolist/item/?listid=" + listedata.list_id;
 
-	txtListid.innerHTML = "List number: " + listId;
-	txtListname.innerHTML = "List name: "
-    ;
+
+	txtListname.innerHTML = listedata.list_name;
+
 
     //load the JSON-data (array)
-    superfetch(url, "json", success, error);
+    superfetch(url, "json", succ, error);
 
 
 
 	btnBack.onclick = function() {
+
 		window.location.href = "showlist.html";
 	}
-
-	btnCreate.onclick = function() {
-
-		window.location.href = "createitem.html";
-    }
 
 	 btnDelete.onclick = function() {
 
 			window.location.href = "showlist.html";
 
-            var token = JSON.parse(localStorage.getItem("logindata")).token;
-            var url = "http://localhost:3000/todolist/list/?list_id=" + listId + "&token=" + token;
+
+            var url = "http://localhost:3000/todolist/list/?list_id=" + listedata.list_id + "&token=" + logindata.token;
             superfetch(url, "json", delSucc, error, {method: "DELETE"});
-        }
+	 }
 
 	 //delete success -------------------------------
-        function delSucc(data) {
-            console.log(data);
-		}
+     function delSucc(data) {
 
-	function success(data) {
+            console.log(data);
+	 }
+
+	btnCreate.onclick = function() {
+
+    	modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+
+		modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+
+	btnCreateitem.onclick = function() {
+
+		window.location.href = "showitem.html";
+
+        var upload = JSON.stringify({
+
+            item_name: inpItem.value,
+            list_id: dropdown.value
+
+        });
+
+        console.log(upload);
+
+        //var url = "http://localhost:3000/todolist/item/";
+		var url = "http://localhost:3000/todolist/item/?token=" + logindata.token;
+
+        var cfg = {
+
+            method: "POST",
+            body: upload
+
+        }
+
+        superfetch(url, "json", succ, error, cfg);
+
+    }
+
+
+	function succ(data) {
 
 		console.log(data);
 
 		for (var i = 0; i < data.length; i++) {
+
 			var itemId = data[i].item_id;
 			var itemName = data[i].item_name;
             var html = "<h2>" + itemName + "</h2>";
 
-            mylist.addElement(html, itemId,itemName);
+            mylist.addElement(html, itemId, itemName);
         }
 
 		mylist.addEventListener("remove", onlistchange);
@@ -107,13 +187,40 @@
 		window.location.href = "showitem.html"
 
 		var div = evt.selectedValue;
+
 		localStorage.setItem("itemId", div);
-		var token = JSON.parse(localStorage.getItem("logindata")).token;
+
 		var itemId = localStorage.getItem("itemId");
-        var url = "http://localhost:3000/todolist/item/?item_id=" + itemId + "&token=" + token;
+
+        var url = "http://localhost:3000/todolist/item/?item_id=" + itemId + "&token=" + logindata.token;
+
         superfetch(url, "json", delSucc, error, {method: "DELETE"});
 
 	}
+
+
+	   function filldropdown() {
+
+        var url = "http://localhost:3000/todolist/list/?token=" + logindata.token;
+        superfetch(url, "json", function succ(data) {
+
+            console.log(data);
+
+            for (var i = 0; i < data.length; i++) {
+
+            var option = document.createElement("option");
+            option.value = data[i].list_id;
+            option.innerHTML = data[i].list_name;
+            dropdown.appendChild(option);
+        }
+
+
+        }, function(err) {
+
+            console.log(err);
+
+        });
+    }
 
 
 

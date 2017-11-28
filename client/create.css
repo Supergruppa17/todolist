@@ -11,7 +11,7 @@ body {
 	margin-top: 175px;
 }
 
-#inpListname, #inpDuedate, #inpLoginname, #listId, #listName, #inpName {
+#inpListname, #inpDuedate, #inpLoginname {
 	font-family: Century Gothic, sans-serif;
 	font-weight: lighter;
 	font-size: 20px;
@@ -63,7 +63,7 @@ body {
 
 }
 
-#btnCreate {
+#btnCreatelist {
 	font-family: Century Gothic, sans-serif;
 	font-weight: lighter;
 	color: rgba(255, 255, 255, 1);
@@ -79,7 +79,7 @@ body {
 }
 
 
-#btnCreate:hover {
+#btnCreatelist:hover {
 	text-transform: uppercase;
 	border: none;
 }

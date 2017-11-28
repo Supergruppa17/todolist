@@ -32,7 +32,7 @@ router.use(function (req, res, next) {
 
 
 
-//endpoint: GET travels -----------------------------
+//endpoint: GET list -----------------------------
 router.get('/', function (req, res) {
 
     var sql = `PREPARE get_lists (text) AS

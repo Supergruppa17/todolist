@@ -64,6 +64,7 @@ img{
 #btnLogin:hover{
 	text-transform: uppercase;
     border: none;
+	cursor: pointer;
 }
 #btnLogin:focus {
 	outline: none;
@@ -86,6 +87,7 @@ img{
 #btnSignup:hover {
 	text-transform: uppercase;
     border: none;
+	cursor: pointer;
 }
 
 #btnSignup:focus {
@@ -109,7 +111,13 @@ h3 {
 	text-transform: uppercase;
 	text-align: center;
 
+}
 
+p {
+	font-family: Century Gothic, sans-serif;
+	color: #fff;
+	margin-top: 20px;
+	text-align: center;
 }
 
 hr {

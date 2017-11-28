@@ -19,7 +19,7 @@
 		<input id="inpLoginname" placeholder="username">
 		<input type="password" id="inpPassword" placeholder="password">
 		<button id="btnLogin">login</button>
-		<br>
+		<p id="passwordFail"></p>
 		<br>
 		<h3>Don't have an account?</h3>
 		<button id="btnSignup">signup</button>
@@ -35,6 +35,7 @@
     var inpPassword = document.getElementById("inpPassword");
     var btnLogin = document.getElementById("btnLogin");
 	var btnSignup = document.getElementById("btnSignup");
+	var passwordFail = document.getElementById("passwordFail");
 
     //button click ---------------------------------
     btnLogin.onclick = function() {
@@ -52,6 +53,7 @@
         }
 
         superfetch(url, "json", succ, error, cfg);
+
 
     }
 
@@ -84,6 +86,7 @@
     //error ----------------------------------------
     function error(err) {
         console.log(err);
+		passwordFail.innerHTML ="Wrong username or password! Try again!"
     }
 
 

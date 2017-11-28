@@ -38,6 +38,7 @@
     btnCreate.onclick = function() {
 
         var upload = JSON.stringify({
+
             item_name: inpName.value,
             list_id: listId.value,
             list_name: listName.value
@@ -48,6 +49,7 @@
         var url = "http://localhost:3000/todolist/item/";
 
         var cfg = {
+
             method: "POST",
             body: upload
 

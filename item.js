@@ -31,9 +31,9 @@ router.post('/', bodyParser, function (req, res) {
 
 
 
-    var sql = `PREPARE insert_items (int, text, int, text) AS
-                INSERT INTO item VALUES(DEFAULT, $2, $3, $4); EXECUTE insert_items
-                (0, '${upload.item_name}', '${upload.list_id}', '${upload.list_name}')`;
+    var sql = `PREPARE insert_items (int, text, int) AS
+                INSERT INTO item VALUES(DEFAULT, $2, $3); EXECUTE insert_items
+                (0, '${upload.item_name}', '${upload.list_id}')`;
 
     console.log(sql);
     db.any(sql).then(function(data) {

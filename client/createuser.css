@@ -64,11 +64,11 @@ img{
 #btnCreate:hover{
 	text-transform: uppercase;
     border: none;
+	cursor: pointer;
 }
 #btnCreate:focus {
 	outline: none;
 }
-
 
 
 h1 {
@@ -76,6 +76,13 @@ h1 {
 	color: #fff;
 	font-family: Century Gothic, sans-serif;
 	font-weight: bold;
+	text-align: center;
+}
+
+p {
+	font-family: Century Gothic, sans-serif;
+	color: #fff;
+	margin-top: 20px;
 	text-align: center;
 }
 
