@@ -74,7 +74,8 @@
 
 
     ///////////// Henter ut data fra lokaldata om knappen som er trykket på
-	var url = "http://localhost:3000/todolist/item/?listid=" + listedata.list_id;
+	var url = "http://supergruppa.herokuapp.com/todolist/item/?listid=" + listedata.list_id;
+	//var url = "http://localhost:3000/todolist/item/?listid=" + listedata.list_id;
 
 
 	txtListname.innerHTML = listedata.list_name;
@@ -95,7 +96,8 @@
 			window.location.href = "showlist.html";
 
 
-            var url = "http://localhost:3000/todolist/list/?list_id=" + listedata.list_id + "&token=" + logindata.token;
+            var url = "http://supergruppa.herokuapp.com/todolist/list/?list_id=" + listedata.list_id + "&token=" + logindata.token;
+		 	//var url = "http://localhost/todolist/list/?list_id=" + listedata.list_id + "&token=" + logindata.token;
             superfetch(url, "json", delSucc, error, {method: "DELETE"});
 	 }
 
@@ -126,7 +128,7 @@
 
 	btnCreateitem.onclick = function() {
 
-		window.location.href = "showitem.html";
+		//window.location.href = "showitem.html";
 
         var upload = JSON.stringify({
 
@@ -138,7 +140,8 @@
         console.log(upload);
 
         //var url = "http://localhost:3000/todolist/item/";
-		var url = "http://localhost:3000/todolist/item/?token=" + logindata.token;
+		var url = "http://supergruppa.herokuapp.com/todolist/item/?token=" + logindata.token;
+		//var url = "http://localhost:3000/todolist/item/?token=" + logindata.token;
 
         var cfg = {
 
@@ -185,7 +188,8 @@
 
 		var itemId = localStorage.getItem("itemId");
 
-        var url = "http://localhost:3000/todolist/item/?item_id=" + itemId + "&token=" + logindata.token;
+        var url = "http://supergruppa.herokuapp.com/todolist/item/?item_id=" + itemId + "&token=" + logindata.token;
+		//var url = "http://localhost:3000/todolist/item/?item_id=" + itemId + "&token=" + logindata.token;
 
         superfetch(url, "json", delSucc, error, {method: "DELETE"});
 
@@ -194,7 +198,8 @@
 
 	   function filldropdown() {
 
-        var url = "http://localhost:3000/todolist/list/?token=" + logindata.token;
+        var url = "http://supergruppa.herokuapp.com/todolist/list/?token=" + logindata.token;
+		   //var url = "http://localhost:3000/todolist/list/?token=" + logindata.token;
         superfetch(url, "json", function succ(data) {
 
             console.log(data);
@@ -214,85 +219,6 @@
 
         });
     }
-
-
-
-	/*
-
-	var txtName = document.getElementById("txtName");
-	var txtName2 = document.getElementById("txtName2");
-    var inpId = document.getElementById("inpId");
-    var btnDelete = document.getElementById("btnDelete");
-    var btnCreate = document.getElementById("btnCreate");
-	var btnBack = document.getElementById("btnBack");
-
-    var logData = localStorage.getItem("listeinfo");
-
-
-    var url = "http://localhost:3000/todolist/item/?listid=" + logData;
-
-    console.log(url)
-
-    superfetch(url, "json", succ, error);
-
-
-
-    //success --------------------------------------
-    function succ(data) {
-        console.log(data); //Hello World!
-
-		txtName.innerHTML = "List number: " + logData;
-		txtName2.innerHTML = "List name: ";
-
-
-
-    console.log(logData)
-
-    btnDelete.onclick = function() {
-
-		window.location.href = "showitem.html";
-
-		var url = "http://localhost:3000/todolist/item/?item_id=" + inpId.value;
-        superfetch(url, "json", delSucc, error, {method: "DELETE"});
-    }
-
-    btnCreate.onclick = function() {
-
-		window.location.href = "createitem.html";
-    }
-
-	btnBack.onclick = function() {
-
-	}
-
-    //delete success -------------------------------
-    function delSucc(data) {
-        console.log(data);
-    }
-
-        for (var i = 0; i < data.length; i++) {
-
-            var div = document.createElement("div");
-			div.innerHTML += "<h2>" + data[i].item_name + "</h2>";
-            div.innerHTML += "<h3>Item ID: " + data[i].item_id + "</h3>";
-            var hr = document.createElement("hr");
-
-            document.body.appendChild(div);
-            document.body.appendChild(hr);
-
-			//txtName2.innerHTML += data[i].list_name;
-
-
-    	}
-    }
-
-    //error ----------------------------------------
-    function error(err) {
-        console.log(err);
-    }
-
-	*/
-
 
 
 </script>

@@ -35,14 +35,15 @@
     //button click ---------------------------------
     btnCreate.onclick = function() {
 
-        window.location.href = "login.html";
+       	window.location.href = "login.html";
 
         var upload = JSON.stringify({
             login_name: inpLoginname.value,
             password: inpPassword.value
         });
 
-        var url = "http://localhost:3000/todolist/users/";
+        var url = "http://supergruppa.herokuapp.com/todolist/users/";
+		//var url = "http://localhost:3000/todolist/users/""
 
         var cfg = {
             method: "POST",
