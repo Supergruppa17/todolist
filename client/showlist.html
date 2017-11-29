@@ -24,6 +24,7 @@
 	<hr>
 	<div id="form">
 		<br>
+		<button id="btnSignout">sign out</button>
 		<button id="btnCreate">create new list</button>
 		<br>
 
@@ -40,9 +41,9 @@
 			<hr id="linje">
 			<br>
 			<input id="inpListname" placeholder="list name">
-			<input type="date" id="inpDuedate">
+			<input type="text" onfocus="(this.type='date')"  placeholder="due date" id="inpDuedate">
 			<!--<input id="inpLoginname" placeholder="username"> -->
-			<select id = "dropdown"></select>
+			<!--<select id = "dropdown"></select> -->
 			<button id="btnCreatelist">create</button>
 
   		</div>
@@ -64,8 +65,8 @@
     var inpDuedate = document.getElementById("inpDuedate");
     var inpLoginname = document.getElementById("inpLoginname");
     var btnCreatelist = document.getElementById("btnCreatelist");
-
-	var dropdown = document.getElementById("dropdown");
+	//var dropdown = document.getElementById("dropdown");
+	var btnSignout = document.getElementById("btnSignout");
 
     var mylist = superlist();
     document.body.appendChild(mylist);
@@ -78,10 +79,17 @@
 
 	console.log(url);
 
-	filldropdown();
+	//filldropdown();
 
     //load the JSON-data (array)
     superfetch(url, "json", succ, error);
+
+	btnSignout.onclick = function() {
+
+		window.location.href = ("login.html");
+		localStorage.clear();
+
+	}
 
 	btnCreate.onclick = function() {
 
@@ -104,7 +112,7 @@
 
 	btnCreatelist.onclick = function() {
 
-		window.location.href = "showlist.html";
+		//window.location.href = "showlist.html";
 
         //var logindata = JSON.parse(localStorage.getItem("logindata"));
         var url = "http://localhost:3000/todolist/list/?token=" + logindata.token;
@@ -113,8 +121,7 @@
 
         var upload = JSON.stringify({
             list_name: inpListname.value,
-            due_date: inpDuedate.value,
-            login_name: dropdown.value
+            due_date: inpDuedate.value
         });
 
 
@@ -182,7 +189,7 @@
 
     }
 
-	function filldropdown() {
+	/*function filldropdown() {
 
         var url = "http://localhost:3000/todolist/users/?token=" + logindata.token;
         superfetch(url, "json", function succ(data) {
@@ -203,7 +210,7 @@
             console.log(err);
 
         });
-    }
+    }*/
 
 
 

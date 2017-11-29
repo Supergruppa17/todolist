@@ -4,6 +4,7 @@ var db = require('./dbconnect'); //database
 var bodyParser = require('body-parser').text();
 
 
+
 //endpoint: GET travels -----------------------------
 router.get('/', function (req, res) {
 

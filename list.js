@@ -59,7 +59,7 @@ router.post('/', bodyParser, function (req, res) {
 
     var sql = `PREPARE insert_lists (int, text, date, text) AS
                 INSERT INTO list VALUES(DEFAULT, $2, $3, $4); EXECUTE insert_lists
-                (0, '${upload.list_name}', '${upload.due_date}', '${upload.login_name}')`;
+                (0, '${upload.list_name}', '${upload.due_date}', '${logindata.login_name}')`;
 
 
 
