@@ -1,20 +1,16 @@
-
 ul.superListStyle {
 	position: relative;
     list-style-type: none;
     padding-left: 5px;
 	width: 50%;
-
-
-
 }
 
 ul.superListStyle>li {
-    cursor: pointer;
+	cursor: pointer;
 	border-bottom: 1px solid rgba(255, 255, 255, .75);
 	margin-top: 40px;
 }
 
 ul.superListStyle>li:focus {
-    outline: none;
+	outline: none;
 }

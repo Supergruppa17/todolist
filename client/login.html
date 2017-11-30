@@ -1,97 +1,99 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <meta charset="utf-8" />
-    <title>Login</title>
-    <script src="superfetch2.js"></script>
-	<link rel="stylesheet" type="text/css" href="login.css">
-</head>
+	<head>
+		<meta charset="utf-8" />
+		<title>Login</title>
+		<script src="superfetch2.js"></script>
+		<link rel="stylesheet" type="text/css" href="login.css">
+	</head>
 
-<body>
+	<body>
 
-	<div id="form">
+		<div id="form">
+			<h1>Want to organize your life?</h1>
+			<hr>
+			<br>
+			<input id="inpLoginname" placeholder="username">
+			<input type="password" id="inpPassword" placeholder="password">
+			<button id="btnLogin">login</button>
+			<p id="passwordFail"></p>
+			<br>
+			<h3>Don't have an account?</h3>
+			<button id="btnSignup">signup</button>
+
+		</div>
+
+	</body>
+
+	<script>
+
+		var inpLoginname = document.getElementById("inpLoginname");
+		var inpPassword = document.getElementById("inpPassword");
+		var btnLogin = document.getElementById("btnLogin");
+
+		var passwordFail = document.getElementById("passwordFail");
+
+		var btnSignup = document.getElementById("btnSignup");
 
 
-		<h1>Want to organize your life?</h1>
-		<hr>
-		<br>
-		<input id="inpLoginname" placeholder="username">
-		<input type="password" id="inpPassword" placeholder="password">
-		<button id="btnLogin">login</button>
-		<p id="passwordFail"></p>
-		<br>
-		<h3>Don't have an account?</h3>
-		<button id="btnSignup">signup</button>
+//button click ---------------------------------
+		btnLogin.onclick = function() {
 
-	</div>
+			var upload = JSON.stringify({
+				login_name: inpLoginname.value,
+				password: inpPassword.value
+			});
 
-
-</body>
-
-<script>
-
-    var inpLoginname = document.getElementById("inpLoginname");
-    var inpPassword = document.getElementById("inpPassword");
-    var btnLogin = document.getElementById("btnLogin");
-	var btnSignup = document.getElementById("btnSignup");
-	var passwordFail = document.getElementById("passwordFail");
-
-    //button click ---------------------------------
-    btnLogin.onclick = function() {
-
-        var upload = JSON.stringify({
-            login_name: inpLoginname.value,
-            password: inpPassword.value
-        });
-
-        var url = "http://supergruppa.herokuapp.com/todolist/users/auth/";
+		var url = "http://supergruppa.herokuapp.com/todolist/users/auth/";
 		//var url = "http://localhost:3000/todolist/users/auth/";
 
-        var cfg = {
-            method: "POST",
-            body: upload
-        }
+		var cfg = {
+			method: "POST",
+			body: upload
+		}
 
-        superfetch(url, "json", succ, error, cfg);
+		superfetch(url, "json", succ, error, cfg);
 
-    }
+		}
 
+		btnSignup.onclick = function() {
 
-	btnSignup.onclick = function() {
-
-		console.log("hi");
-		window.location.href = "createuser.html";
-	}
-
-
-    //success --------------------------------------
-    function succ(data) {
-
-		console.log("hurra")
-
-        //save logindata/token to localStorage
-
-        if(data.token) {
-
-            localStorage.setItem("logindata", JSON.stringify(data));
-            window.location.href = "showlist.html";
-        }
-         else {
-            txtMsg.innerHTML = "Something went wrong. Please try again later";
-		 }
-
-    }
-
-    //error ----------------------------------------
-    function error(err) {
-        console.log(err);
-		passwordFail.innerHTML ="Wrong username or password! Try again!"
-    }
+			console.log("hi");
+			window.location.href = "createuser.html";
+		}
 
 
+		//success --------------------------------------
+		function succ(data) {
 
-</script>
+			console.log("hurra")
+
+			//save logindata/token to localStorage
+
+			if(data.token) {
+
+				localStorage.setItem("logindata", JSON.stringify(data));
+				window.location.href = "showlist.html";
+			}
+
+			else {
+
+				txtMsg.innerHTML = "Something went wrong. Please try again later";
+			}
+
+		}
+
+		//error ----------------------------------------
+		function error(err) {
+
+			console.log(err);
+			passwordFail.innerHTML ="Wrong username or password! Try again!"
+		}
+
+
+
+	</script>
 
 
 

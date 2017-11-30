@@ -30,8 +30,6 @@ router.use(function (req, res, next) {
     next(); //we have a valid token - go to the requested endpoint
 });
 
-
-
 //endpoint: GET list -----------------------------
 router.get('/', function (req, res) {
 
@@ -74,6 +72,7 @@ router.post('/', bodyParser, function (req, res) {
 
     });
 });
+
 router.delete('/', function (req, res) {
 
     var upload = req.query.list_id; //uploaded data should be sanitized
@@ -81,8 +80,6 @@ router.delete('/', function (req, res) {
     var sql = `PREPARE delete_lists (int, text) AS
             DELETE FROM list WHERE list_id=$1 AND login_name=$2 RETURNING *;
             EXECUTE delete_lists('${upload}','${logindata.login_name}')`;
-
-     console.log(sql);
 
     db.any(sql).then(function(data) {
 
@@ -99,8 +96,6 @@ router.delete('/', function (req, res) {
         res.status(500).json(err);
     });
 });
-
-
 
 //export module -------------------------------------
 module.exports = router;

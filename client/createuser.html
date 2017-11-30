@@ -1,75 +1,74 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <meta charset="utf-8" />
-    <title>Create user</title>
-    <script src="superfetch2.js"></script>
-	<link rel="stylesheet" type="text/css" href="createuser.css">
-</head>
+	<head>
+		<meta charset="utf-8" />
+		<title>Create user</title>
+		<script src="superfetch2.js"></script>
+		<link rel="stylesheet" type="text/css" href="createuser.css">
+	</head>
 
-<body>
+	<body>
 
-	<div id="form">
+		<div id="form">
+			<h1>Create a new user</h1>
+			<hr>
+			<br>
+			<input id="inpLoginname" placeholder="username">
+			<input type="password" id="inpPassword" placeholder="password">
+			<button id="btnCreate">create</button>
+			<p id="wrongInput"></p>
 
-		<h1>Create a new user</h1>
-		<hr>
-		<br>
-    	<input id="inpLoginname" placeholder="username">
-    	<input type="password" id="inpPassword" placeholder="password">
-    	<button id="btnCreate">create</button>
-		<p id="wrongInput"></p>
-
-	</div>
-
-
-</body>
-
-<script>
-
-    var inpLoginname = document.getElementById("inpLoginname");
-    var inpPassword = document.getElementById("inpPassword");
-    var btnCreate = document.getElementById("btnCreate");
-	var wrongInput = document.getElementById("wrongInput");
-
-    //button click ---------------------------------
-    btnCreate.onclick = function() {
-
-       	window.location.href = "login.html";
-
-        var upload = JSON.stringify({
-            login_name: inpLoginname.value,
-            password: inpPassword.value
-        });
-
-        var url = "http://supergruppa.herokuapp.com/todolist/users/";
-		//var url = "http://localhost:3000/todolist/users/""
-
-        var cfg = {
-            method: "POST",
-            body: upload
-        }
-
-        superfetch(url, "json", succ, error, cfg);
+		</div>
 
 
-    }
+	</body>
 
-    //success --------------------------------------
-    function succ(data) {
+	<script>
+
+		var inpLoginname = document.getElementById("inpLoginname");
+		var inpPassword = document.getElementById("inpPassword");
+		var btnCreate = document.getElementById("btnCreate");
+		var wrongInput = document.getElementById("wrongInput");
+
+		//button click ---------------------------------
+		btnCreate.onclick = function() {
+
+			//window.location.href = "login.html";
+
+			var upload = JSON.stringify({
+
+				login_name: inpLoginname.value,
+				password: inpPassword.value
+			});
+
+			var url = "http://supergruppa.herokuapp.com/todolist/users/";
+			//var url = "http://localhost:3000/todolist/users/";
+
+			var cfg = {
+				method: "POST",
+				body: upload
+			}
+
+			superfetch(url, "json", succ, error, cfg);
 
 
-    }
+		}
 
-    //error ----------------------------------------
-    function error(err) {
-        console.log(err);
+		//success --------------------------------------
+		function succ(data) {
 
-		wrongInput.innerHTML = "Username alredy exists. Pick another!";
-    }
+		}
+
+		//error ----------------------------------------
+		function error(err) {
+
+			console.log(err);
+			wrongInput.innerHTML = "Username alredy exists. Pick another!";
+		}
 
 
 
-</script>
+	</script>
 
 </html>

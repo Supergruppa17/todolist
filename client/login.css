@@ -9,17 +9,10 @@ body {
 	width: 50%;
 	margin: auto;
 	margin-top: 80px;
-
-
-}
-img{
-	width: 50%;
-	margin-left: 20%;
-	margin-top: 5px;
-
 }
 
-#inpLoginname, #inpPassword {
+#inpLoginname,
+#inpPassword {
 	font-family: Century Gothic, sans-serif;
 	font-weight: lighter;
 	font-size: 20px;
@@ -30,25 +23,19 @@ img{
 	text-align: center;
 }
 
-#inpLoginname::placeholder {
+#inpLoginname::placeholder,
+#inpPassword::placeholder  {
 	color: #aaaaaa;
 	position:relative;
 }
 
-#inpLoginname:focus {
+#inpLoginname,
+inpPassword:focus {
 	outline: none;
 }
 
-#inpPassword::placeholder {
-	color: #aaaaaa;
-	position:relative;
-}
-
-#inpPassword:focus {
-	outline: none;
-}
-
-#btnLogin {
+#btnLogin,
+#btnSignup {
 	font-family: Century Gothic, sans-serif;
 	font-weight: lighter;
 	color: rgba(255, 255, 255, 1);
@@ -61,35 +48,14 @@ img{
 
 }
 
-#btnLogin:hover{
-	text-transform: uppercase;
-    border: none;
-	cursor: pointer;
-}
-#btnLogin:focus {
-	outline: none;
-}
-
-#btnSignup {
-	font-family: Century Gothic, sans-serif;
-	font-weight: lighter;
-	color: rgba(255, 255, 255, 1);
-	width: 100%;
-	height: 50px;
-	font-size: 20px;
-	border: none;
-	border-bottom: 1px solid rgba(255, 255, 255, .75);
-	background: transparent;
-
-
-}
-
+#btnLogin:hover,
 #btnSignup:hover {
 	text-transform: uppercase;
     border: none;
 	cursor: pointer;
 }
 
+#btnLogin,
 #btnSignup:focus {
 	outline: none;
 }
@@ -102,7 +68,6 @@ h1 {
 	text-align: center;
 }
 
-
 h3 {
 	font-family: Century Gothic, sans-serif;
 	font-weight: bold;
@@ -110,7 +75,6 @@ h3 {
 	margin-top: 30px;
 	text-transform: uppercase;
 	text-align: center;
-
 }
 
 p {
@@ -121,7 +85,5 @@ p {
 }
 
 hr {
-
 	border: 1px solid rgba(255, 255, 255, .75);
-
 }

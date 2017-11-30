@@ -3,15 +3,10 @@ var router = express.Router();
 var db = require('./dbconnect'); //database
 var bodyParser = require('body-parser').text();
 
-
-
 //endpoint: GET travels -----------------------------
 router.get('/', function (req, res) {
 
     var listid = req.query.listid;
-	var itemid = req.query.itemid;
-	//var listname = req.query.listname;
-
 
     var sql = `SELECT * FROM item WHERE list_id=${listid}`;
 
@@ -30,13 +25,10 @@ router.post('/', bodyParser, function (req, res) {
 
     var upload = JSON.parse(req.body);
 
-
-
     var sql = `PREPARE insert_items (int, text, int) AS
                 INSERT INTO item VALUES(DEFAULT, $2, $3); EXECUTE insert_items
                 (0, '${upload.item_name}', '${upload.list_id}')`;
 
-    console.log(sql);
     db.any(sql).then(function(data) {
 
 	db.any("DEALLOCATE insert_items");

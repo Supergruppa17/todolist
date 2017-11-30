@@ -23,19 +23,12 @@ router.get('/', function (req, res) {
 
 router.post('/', bodyParser, function (req, res) {
 
-
-
     var upload = JSON.parse(req.body);  //should be sanitized
     var encrPassw = bcrypt.hashSync(upload.password, 10); //hash the password
 
     var sql = `PREPARE insert_user (int, text, text) AS
                 INSERT INTO users VALUES(DEFAULT, $2, $3); EXECUTE insert_user
                 (0, '${upload.login_name}', '${encrPassw}')`;
-
-
-
-    console.log(sql);
-
 
     db.any(sql).then(function(data) {
 
@@ -98,11 +91,6 @@ router.post('/auth/', bodyParser, function (req, res) {
 
     });
 });
-
-
-
-
-
 
 //export module -------------------------------------
 module.exports = router;
