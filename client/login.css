@@ -30,7 +30,7 @@ body {
 }
 
 #inpLoginname,
-inpPassword:focus {
+#inpPassword:focus {
 	outline: none;
 }
 
