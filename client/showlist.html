@@ -73,7 +73,7 @@
 
 		btnSignout.onclick = function() {
 
-			window.location.assign = ("http://supergruppa.herokuapp.com/login.html");
+			window.location.href = ("http://supergruppa.herokuapp.com/login.html");
 			//window.location.href = "login.html";
 
 			localStorage.clear();
@@ -100,7 +100,7 @@
 
 		btnCreatelist.onclick = function() {
 
-			window.location.assign = "http://supergruppa.herokuapp.com/showlist.html";
+			window.location.href = "http://supergruppa.herokuapp.com/showlist.html";
 			//window.location.href = "showlist.html";
 
 			var url = "http://supergruppa.herokuapp.com/todolist/list/?token=" + logindata.token;
@@ -156,7 +156,7 @@
 			//Lagrer den knappen man har trykket på------------
 			localStorage.setItem("listId", div);
 
-			window.location.assign = "http://supergruppa.herokuapp.com/showitem.html";
+			window.location.href = "http://supergruppa.herokuapp.com/showitem.html";
 			//window.location.href = "showitem.html";
 		}
 
