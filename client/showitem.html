@@ -75,11 +75,13 @@
 
 		btnBack.onclick = function() {
 
-			window.location.href = "showlist.html";
+			window.location.assign = "http://supergruppa.herokuapp.com/showlist.html";
+			//window.location.href = "showlist.html";
 		}
 
 		btnDelete.onclick = function() {
 
+			window.location.assign = "http://supergruppa.herokuapp.com/showlist.html";
 			//window.location.href = "showlist.html";
 
 			var url = "http://supergruppa.herokuapp.com/todolist/list/?list_id=" + listedata.list_id + "&token=" + logindata.token;
@@ -116,7 +118,8 @@
 
 		btnCreateitem.onclick = function() {
 
-			window.location.href = "showitem.html";
+			window.location.assign = "http://supergruppa.herokuapp.com/showitem.html";
+			//window.location.href = "showitem.html";
 
 			var upload = JSON.stringify({
 
@@ -166,6 +169,7 @@
 
 		function onlistchange(evt){
 
+			window.location.assign = "http://supergruppa.herokuapp.com/showitem.html";
 			//window.location.href = "showitem.html";
 
 			var div = evt.selectedValue;

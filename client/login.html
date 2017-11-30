@@ -60,7 +60,8 @@
 		btnSignup.onclick = function() {
 
 			console.log("hi");
-			window.location.href = "createuser.html";
+			window.location.assign = "http://supergruppa.herokuapp.com/createuser.html";
+			//window.location.href = "createuser.html";
 		}
 
 
@@ -74,7 +75,8 @@
 			if(data.token) {
 
 				localStorage.setItem("logindata", JSON.stringify(data));
-				window.location.href = "showlist.html";
+				window.location.assign = "http://supergruppa.herokuapp.com/showlist.html";
+				//window.location.href = "showlist.html";
 			}
 
 			else {
